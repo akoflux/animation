@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mathis – Fiche de liaison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Courier+Prime:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --desk: #d9cdb4;
+    --paper: #fffdf6;
+    --line: #dfe6ef;
+    --margin: #f1a5a5;
+    --ink: #1f2a44;
+    --pencil: #5b6170;
+    --red: #d62828;
+    --postit: #fff38a;
+    --tape: rgba(240, 230, 190, .75);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--desk);
+    background-image: radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px);
+    background-size: 6px 6px;
+    color: var(--ink);
+    font-family: "Patrick Hand", "Comic Sans MS", cursive;
+    font-size: 19px;
+    line-height: 1.5;
+    padding: 24px 16px 60px;
+  }
+  img, video { max-width: 100%; display: block; }
+
+  /* ---------- Feuilles ---------- */
+  .sheet {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto 40px;
+    background: var(--paper);
+    background-image:
+      linear-gradient(90deg, transparent 54px, var(--margin) 54px, var(--margin) 56px, transparent 56px),
+      repeating-linear-gradient(var(--paper) 0 31px, var(--line) 31px 32px);
+    padding: 36px 28px 40px 76px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.15), 0 12px 30px rgba(60,40,10,.18);
+  }
+  .sheet:nth-of-type(1) { transform: rotate(-.4deg); }
+  .sheet:nth-of-type(2) { transform: rotate(.35deg); }
+  .holes::before, .holes::after {
+    content: ""; position: absolute; left: 20px; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--desk); box-shadow: inset 0 1px 3px rgba(0,0,0,.35);
+  }
+  .holes::before { top: 18%; }
+  .holes::after { bottom: 18%; }
+
+  .typed { font-family: "Courier Prime", monospace; }
+  .hand  { font-family: "Caveat", cursive; }
+
+  /* ---------- En-tête fiche ---------- */
+  .form-head {
+    border: 2px solid var(--ink);
+    padding: 14px 16px;
+    text-align: center;
+    background: var(--paper);
+    margin-bottom: 8px;
+  }
+  .form-head h1 {
+    font-family: "Courier Prime", monospace;
+    font-size: clamp(20px, 4.6vw, 30px);
+    letter-spacing: .06em;
+    margin: 0;
+  }
+  .form-head p { font-family: "Courier Prime", monospace; margin: 4px 0 0; font-size: 15px; }
+  .late-stamp {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: "Courier Prime", monospace;
+    font-weight: 700;
+    color: var(--red);
+    border: 3px double var(--red);
+    padding: 2px 10px;
+    transform: rotate(-3deg);
+    font-size: 15px;
+    letter-spacing: .08em;
+  }
+  .late-stamp + .hand { color: var(--red); font-size: 22px; display: block; margin-top: 2px; }
+
+  .identity {
+    display: grid;
+    grid-template-columns: 1fr 170px;
+    gap: 20px;
+    margin-top: 26px;
+    align-items: start;
+  }
+  .fields { margin: 0; }
+  .field { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-bottom: 10px; }
+  .field dt {
+    font-family: "Courier Prime", monospace; font-size: 14px; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--pencil); flex: 0 0 auto;
+  }
+  .field dd {
+    margin: 0; font-family: "Caveat", cursive; font-size: 27px; line-height: 1.15;
+    color: var(--ink); flex: 1 1 200px; border-bottom: 1px dotted var(--pencil);
+  }
+  .field dd small { font-size: 21px; color: var(--pencil); }
+
+  .id-photo {
+    border: 2px solid var(--ink); padding: 6px; background: #fff; text-align: center;
+    transform: rotate(2deg);
+  }
+  .id-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 22%; }
+  .id-photo span { font-family: "Courier Prime", monospace; font-size: 11px; text-transform: uppercase; display: block; margin-top: 4px; }
+  .id-photo .hand { font-size: 19px; text-transform: none; color: var(--pencil); font-family: "Caveat", cursive; }
+
+  /* ---------- Sections ---------- */
+  h2 {
+    font-family: "Courier Prime", monospace;
+    font-size: 17px; text-transform: uppercase; letter-spacing: .06em;
+    background: var(--ink); color: var(--paper);
+    padding: 4px 10px; margin: 40px 0 16px; display: inline-block;
+  }
+  .block { margin-bottom: 34px; }
+  .block h3 {
+    font-family: "Caveat", cursive; font-size: 32px; margin: 0 0 4px; line-height: 1.1;
+  }
+  .block h3 .num { color: var(--red); margin-right: 6px; }
+  .block p { margin: 0 0 10px; }
+  .aside { color: var(--pencil); font-family: "Caveat", cursive; font-size: 24px; line-height: 1.2; }
+
+  /* ---------- Polaroids ---------- */
+  .pics { display: flex; flex-wrap: wrap; gap: 22px; margin: 16px 0 6px; }
+  .polaroid {
+    position: relative; background: #fff; padding: 10px 10px 8px; margin: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,.18); flex: 1 1 240px; max-width: 100%;
+  }
+  .polaroid:nth-child(odd)  { transform: rotate(-1.6deg); }
+  .polaroid:nth-child(even) { transform: rotate(1.4deg); }
+  .polaroid img, .polaroid video { width: 100%; height: auto; background: #111; }
+  .polaroid.tall img, .polaroid.tall video { max-height: 520px; object-fit: cover; }
+  .polaroid figcaption { font-family: "Caveat", cursive; font-size: 22px; text-align: center; line-height: 1.15; padding-top: 6px; }
+  .polaroid::before {
+    content: ""; position: absolute; top: -12px; left: 50%; width: 90px; height: 24px;
+    background: var(--tape); transform: translateX(-50%) rotate(-3deg);
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
+  }
+  .polaroid.wide { flex-basis: 100%; }
+  .polaroid.narrow { flex: 0 1 300px; margin: 0 auto; }
+
+  /* ---------- Trousseau ---------- */
+  .trousseau-title {
+    font-family: "Courier Prime", monospace; text-align: center;
+    font-size: clamp(22px, 5vw, 32px); margin: 6px 0 4px; letter-spacing: .03em;
+  }
+  .trousseau-title .strike { position: relative; display: inline-block; }
+  .trousseau-title .strike svg {
+    position: absolute; left: -10%; top: 10%; width: 120%; height: 80%; overflow: visible; pointer-events: none;
+  }
+  .trousseau-title .strike path {
+    fill: none; stroke: var(--red); stroke-width: 5; stroke-linecap: round;
+    stroke-dasharray: 120; stroke-dashoffset: 120; transition: stroke-dashoffset .5s ease-out;
+  }
+  .trousseau-title .six {
+    font-family: "Caveat", cursive; color: var(--red); font-size: 1.6em; font-weight: 700;
+    display: inline-block; margin: 0 4px 0 2px; transform: rotate(-8deg) translateY(-8px) scale(0);
+    transition: transform .35s cubic-bezier(.3,1.6,.6,1) .45s;
+  }
+  .trousseau-title.go .strike path { stroke-dashoffset: 0; }
+  .trousseau-title.go .six { transform: rotate(-8deg) translateY(-8px) scale(1); }
+  .subtitle { text-align: center; font-family: "Courier Prime", monospace; font-size: 14px; color: var(--pencil); margin: 0; }
+
+  .postit {
+    background: var(--postit); max-width: 380px; margin: 26px auto 34px; padding: 18px 20px 16px;
+    font-family: "Caveat", cursive; font-size: 25px; line-height: 1.25;
+    transform: rotate(-2.5deg); box-shadow: 0 6px 14px rgba(0,0,0,.18);
+    position: relative;
+  }
+  .postit::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 26px; background: rgba(0,0,0,.035); }
+  .postit p { margin: 0 0 8px; }
+  .postit .sign { text-align: right; margin: 0; }
+
+  .item { border-top: 2px dashed #c9cfd8; padding-top: 22px; margin-top: 30px; }
+  .item-head { display: flex; gap: 14px; align-items: flex-start; }
+  .box {
+    flex: 0 0 34px; height: 34px; border: 2px solid var(--ink); position: relative; margin-top: 4px; background: #fff;
+  }
+  .box::after {
+    content: "✓"; position: absolute; left: 3px; top: -16px; font-family: "Caveat", cursive;
+    font-size: 46px; color: var(--red); line-height: 1;
+  }
+  .item-head h3 { font-family: "Caveat", cursive; font-size: 34px; line-height: 1.05; margin: 0; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: "Courier Prime", monospace;
+    font-size: 13.5px; color: var(--pencil); margin: 4px 0 0;
+  }
+  .meta b { color: var(--ink); }
+  .item p { margin: 12px 0 0; }
+  .rule {
+    margin-top: 12px; font-family: "Courier Prime", monospace; font-size: 14px;
+    border-left: 3px solid var(--red); padding: 2px 0 2px 10px; color: var(--pencil);
+  }
+  .rule b { color: var(--red); }
+
+  .stamp {
+    display: inline-block; font-family: "Courier Prime", monospace; font-weight: 700; font-size: 14px;
+    color: var(--red); border: 2px solid var(--red); padding: 1px 8px; transform: rotate(-2deg);
+    letter-spacing: .05em; margin-top: 10px;
+  }
+
+  .counter {
+    display: flex; align-items: center; gap: 14px; margin: 14px 0 0; flex-wrap: wrap;
+  }
+  .tally { font-family: "Caveat", cursive; font-size: 34px; letter-spacing: 2px; line-height: 1; }
+  .tally s { text-decoration-color: var(--red); text-decoration-thickness: 3px; }
+  .counter .goal { font-family: "Caveat", cursive; font-size: 26px; color: var(--red); }
+
+  /* ---------- Pied de page ---------- */
+  .signature { margin-top: 46px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: flex-end; }
+  .signature .typed { font-size: 14px; }
+  .signature .sig { font-family: "Caveat", cursive; font-size: 46px; transform: rotate(-4deg); line-height: 1; display: inline-block; }
+  .ps { margin-top: 28px; font-family: "Caveat", cursive; font-size: 24px; color: var(--pencil); line-height: 1.25; }
+
+  @media (max-width: 600px) {
+    body { font-size: 18px; padding: 16px 16px 40px; }
+    .sheet {
+      padding: 26px 16px 30px 34px;
+      background-image:
+        linear-gradient(90deg, transparent 22px, var(--margin) 22px, var(--margin) 23px, transparent 23px),
+        repeating-linear-gradient(var(--paper) 0 31px, var(--line) 31px 32px);
+    }
+    .holes::before, .holes::after { left: 6px; width: 11px; height: 11px; }
+    .identity { grid-template-columns: 1fr; }
+    .id-photo { max-width: 200px; margin: 0 auto; order: -1; }
+    .polaroid { flex-basis: 100%; }
+    .sheet:nth-of-type(n) { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trousseau-title .strike path, .trousseau-title .six { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== FEUILLE 1 : FICHE SANITAIRE ===================== -->
+<main>
+<section class="sheet holes">
+  <header class="form-head">
+    <h1>FICHE SANITAIRE DE LIAISON</h1>
+    <p>Séjour : Port K (Port Camargue) · Équipe d'animation</p>
+    <span class="late-stamp">À RENDRE AVANT LE DÉPART</span>
+    <span class="hand">(rendue en retard, pardon)</span>
+  </header>
+
+  <div class="identity">
+    <dl class="fields">
+      <div class="field"><dt>Prénom</dt><dd>Mathis</dd></div>
+      <div class="field"><dt>Année de naissance</dt><dd>2006 <small>(oui, un 2006. Respirez.)</small></dd></div>
+      <div class="field"><dt>Âge</dt><dd>20 ans</dd></div>
+      <div class="field"><dt>Anim depuis</dt><dd>4 ans et demi</dd></div>
+      <div class="field"><dt>UCPA depuis</dt><dd>1 an et demi <small>(après de longues critiques)</small></dd></div>
+      <div class="field"><dt>Allergies</dt><dd>Le peigne. Les déos en spray en intérieur.</dd></div>
+      <div class="field"><dt>Traitement en cours</dt><dd>Paris Saint-Germain <small>(à vie)</small></dd></div>
+      <div class="field"><dt>Pointure</dt><dd>45 <small>(en crocs Spider-Man, si elles arrivent)</small></dd></div>
+    </dl>
+
+    <div class="id-photo">
+      <img src="Images/deo%20image.jpg" alt="Mathis couvert de déodorants confisqués">
+      <span>Photo d'identité</span>
+      <span class="hand">prise un jour calme</span>
+    </div>
+  </div>
+
+  <h2>Antécédents UCPA</h2>
+  <div class="block">
+    <p>Ça fait 1 an et demi que j'ai découvert l'UCPA, après l'avoir longuement critiquée. J'ai pas arrêté de critiquer, je dois avouer. J'ai juste développé.</p>
+    <div class="pics">
+      <figure class="polaroid wide">
+        <img src="Images/ucpa1.jpg" alt="Équipe d'animation UCPA à la montagne" loading="lazy">
+        <figcaption>Où est Mathis ? Indice : le bonnet.</figcaption>
+      </figure>
+      <figure class="polaroid wide">
+        <img src="Images/ucpa2.jpg" alt="Autre équipe d'animation UCPA en terrasse" loading="lazy">
+        <figcaption>Même jeu, autre équipe. Même bonnet.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <h2>Activités hors colo</h2>
+
+  <div class="block">
+    <h3><span class="num">a.</span>Surveillant à plein temps</h3>
+    <p>Dans une cité scolaire : je m'occupe des collégiens jusqu'à la prépa, en passant bien évidemment par le lycée. En attendant de pouvoir devenir pompier.</p>
+    <p class="aside">On croise les doigts.</p>
+    <div class="pics">
+      <figure class="polaroid tall">
+        <img src="Images/surveillant2.jpg" alt="Mathis avec des élèves" loading="lazy">
+        <figcaption>Moi et mes élèves</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <img src="Images/surveillant1.png" alt="Élèves pendant un blocus avec des pancartes" loading="lazy">
+        <figcaption>Mes élèves pendant un blocus. Ma fierté.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3><span class="num">b.</span>Formateur BAFA &amp; SB</h3>
+    <p>Formateur BAFA depuis 4 ans, et formateur SB depuis 2 ans.</p>
+    <p class="aside">(La formation coûte plus cher mais on est payé pareil. Croyez pas.)</p>
+    <div class="pics">
+      <figure class="polaroid wide">
+        <img src="Images/formateur.jpg" alt="Mathis et ses stagiaires BAFA" loading="lazy">
+        <figcaption>Moi et mes stagiaires BAFA</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3><span class="num">c.</span>Secouriste en événements</h3>
+    <p>Je suis aussi secouriste sur des événements.</p>
+    <p class="aside">(Oui, j'ai déjà vu des morts.)</p>
+    <div class="pics">
+      <figure class="polaroid narrow">
+        <video src="Images/secours.mp4#t=0.1" autoplay muted loop controls playsinline preload="auto"></video>
+        <figcaption>Mes équipiers et nos victimes qui arrivent au poste</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3><span class="num">d.</span>Sauveteur sur les plages</h3>
+    <p>L'été, je surveille les plages.</p>
+    <p class="aside">(Oui, je suis en moule-bite. Et oui, j'ai déjà sauvé des gens.)</p>
+    <div class="pics">
+      <figure class="polaroid tall">
+        <img src="Images/sauveteur.jpg" alt="Mathis au poste de secours avec son équipe" loading="lazy">
+        <figcaption>Preuve n°1 : la tenue</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <img src="Images/sauvetage.jpg" alt="Mathis pendant un sauvetage en mer" loading="lazy">
+        <figcaption>Preuve n°2 : le sauvetage</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEUILLE 2 : TROUSSEAU ===================== -->
+<section class="sheet holes">
+  <p class="subtitle">LISTE DU TROUSSEAU · À COCHER AU DÉPART</p>
+  <h2 class="trousseau-title" id="title" style="background:none;color:var(--ink);display:block;padding:0;text-transform:none;">
+    Mes
+    <span class="strike">3<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M2 30 C 14 22, 26 16, 38 8"/></svg></span><span class="six" aria-label="6">6</span>
+    indispensables de colo
+  </h2>
+
+  <div class="postit">
+    <p>Désolé, j'ai rendu ma présentation en retard.</p>
+    <p>Pour me faire pardonner, au lieu de 3 indispensables, je vous en mets 6. On est quittes ?</p>
+    <p class="sign">Mathis</p>
+  </div>
+
+  <!-- 1 -->
+  <article class="item">
+    <div class="item-head">
+      <span class="box" aria-hidden="true"></span>
+      <div>
+        <h3>Basile (et son strass)</h3>
+        <div class="meta"><span>Qté : <b>1 Basile</b></span><span>Strass : <b>1</b></span></div>
+      </div>
+    </div>
+    <p>Il vient en colo avec moi. Le strass sur sa dent est indispensable : quand je suis au bout de ma vie, son sourire me remotive.</p>
+    <div class="pics">
+      <figure class="polaroid narrow">
+        <video src="Images/basile%20stras.mp4#t=0.1" autoplay muted loop controls playsinline preload="auto"></video>
+        <figcaption>Le sourire en question</figcaption>
+      </figure>
+    </div>
+    <div class="rule"><b>Consigne :</b> ne pas confisquer le strass.</div>
+  </article>
+
+  <!-- 2 -->
+  <article class="item">
+    <div class="item-head">
+      <span class="box" aria-hidden="true"></span>
+      <div>
+        <h3>Mes crocs Spider-Man</h3>
+        <div class="meta"><span>Qté : <b>1 paire (en théorie)</b></span><span>Pointure : <b>45</b></span><span>Prix : <b>64,99 €</b></span></div>
+      </div>
+    </div>
+    <p>Achat compulsif. Livraison offerte, ce qui aurait dû me mettre la puce à l'oreille. Elles ne sont toujours pas arrivées et j'ai très peur de m'être fait arnaquer par du dropshipping.</p>
+    <p class="aside">Si vous me voyez arriver en tongs, ne posez pas de questions.</p>
+    <div class="pics">
+      <figure class="polaroid narrow">
+        <img src="Images/scam%20crocs.png" alt="Récapitulatif de commande des crocs Spider-Man à 64,99 €" loading="lazy">
+        <figcaption>La preuve d'achat. Seule preuve de leur existence.</figcaption>
+      </figure>
+    </div>
+    <span class="stamp">STATUT : EN COURS DE LIVRAISON (?)</span>
+  </article>
+
+  <!-- 3 -->
+  <article class="item">
+    <div class="item-head">
+      <span class="box" aria-hidden="true"></span>
+      <div>
+        <h3>La brigade anti-déo</h3>
+        <div class="meta"><span>Effectif : <b>moi</b></span><span>Saisies : <b>beaucoup</b></span></div>
+      </div>
+    </div>
+    <p>Les jeunes ont déclenché l'alarme incendie avec leurs déos. Moi, je confisque. Et je porte les saisies sur moi, comme ça rien ne se perd.</p>
+    <div class="pics">
+      <figure class="polaroid">
+        <video src="Images/deo%20video.mp4#t=0.1" autoplay muted loop controls playsinline preload="auto"></video>
+        <figcaption>Intervention de la brigade</figcaption>
+      </figure>
+      <figure class="polaroid">
+        <img src="Images/deo%20image.jpg" alt="Mathis avec les déodorants confisqués accrochés sur lui" loading="lazy">
+        <figcaption>Tenue de travail réglementaire</figcaption>
+      </figure>
+    </div>
+    <div class="rule"><b>Consigne :</b> déodorant en stick uniquement. Les sprays seront portés par l'animateur.</div>
+  </article>
+
+  <!-- 4 -->
+  <article class="item">
+    <div class="item-head">
+      <span class="box" aria-hidden="true"></span>
+      <div>
+        <h3>Les puffs (confisquées)</h3>
+        <div class="meta"><span>Qté autorisée : <b>0</b></span><span>Qté confisquée : <b>record à battre</b></span></div>
+      </div>
+    </div>
+    <p>Mon record actuel : 15 puffs confisquées en un séjour. Mon projet pour Port K : le battre.</p>
+    <div class="counter">
+      <span class="tally"><s>||||</s> <s>||||</s> <s>||||</s></span>
+      <span class="goal">→ objectif : 16 (minimum)</span>
+    </div>
+    <div class="pics">
+      <figure class="polaroid narrow">
+        <img src="Images/puff.jpg" alt="Puffs confisquées posées sur une table" loading="lazy">
+        <figcaption>Petite récolte du soir</figcaption>
+      </figure>
+    </div>
+    <div class="rule"><b>Consigne :</b> interdit. Mais ça, vous le savez déjà.</div>
+  </article>
+
+  <!-- 5 -->
+  <article class="item">
+    <div class="item-head">
+      <span class="box" aria-hidden="true"></span>
+      <div>
+        <h3>Mon bonnet</h3>
+        <div class="meta"><span>Qté : <b>1</b></span><span>Lavé : <b>question suivante</b></span></div>
+      </div>
+    </div>
+    <p>À l'époque où j'avais les cheveux longs, je le portais tout le temps parce que j'avais la flemme de me coiffer. Résultat : les jeunes m'ont surnommé « Hijab ». Le surnom est resté. Le bonnet aussi.</p>
+    <div class="pics">
+      <figure class="polaroid narrow">
+        <img src="Images/bonnet.jpg" alt="Mathis avec son bonnet noir" loading="lazy" style="max-height:520px;object-fit:cover;object-position:50% 20%;">
+        <figcaption>Le bonnet (et un bout de moi)</figcaption>
+      </figure>
+    </div>
+    <div class="rule"><b>Consigne :</b> prévoir un couvre-chef. C'est fait.</div>
+  </article>
+
+  <!-- 6 -->
+  <article class="item">
+    <div class="item-head">
+      <span class="box" aria-hidden="true"></span>
+      <div>
+        <h3>Le Paris Saint-Germain</h3>
+        <div class="meta"><span>Qté : <b>∞</b></span><span>Score : <b>5-0</b></span></div>
+      </div>
+    </div>
+    <p>Finale de la Ligue des Champions à Munich, la toute première du PSG. J'y étais. 5-0. Je vais vous en parler. Souvent. Pardon d'avance.</p>
+    <div class="pics">
+      <figure class="polaroid narrow">
+        <img src="Images/psg.jpg" alt="Mathis en tribune à Munich, écharpe du PSG levée" loading="lazy">
+        <figcaption>Munich. J'en parle encore.</figcaption>
+      </figure>
+    </div>
+    <div class="rule"><b>Consigne :</b> tenue de rechange obligatoire. Elle sera rouge et bleue.</div>
+  </article>
+
+  <div class="signature">
+    <div class="typed">Fait à Port K,<br>Lu et approuvé</div>
+    <div style="text-align:right">
+      <div class="typed">Signature de l'animateur</div>
+      <span class="sig">Mathis</span>
+    </div>
+  </div>
+
+  <p class="ps">P.S. : si quelqu'un a des nouvelles de mes crocs, je suis preneur.<br>Hâte de vous voir à Port K.</p>
+</section>
+</main>
+
+<script>
+  (function () {
+    var t = document.getElementById('title');
+    if (!('IntersectionObserver' in window)) { t.classList.add('go'); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { t.classList.add('go'); io.disconnect(); }
+      });
+    }, { threshold: 0.6 });
+    io.observe(t);
+  })();
+
+  // Vidéos : lecture auto quand elles sont à l'écran, pause sinon
+  (function () {
+    var vids = document.querySelectorAll('video');
+    if (!('IntersectionObserver' in window)) return;
+    var vo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.4 });
+    vids.forEach(function (v) { vo.observe(v); });
+  })();
+</script>
+</body>
+</html>
